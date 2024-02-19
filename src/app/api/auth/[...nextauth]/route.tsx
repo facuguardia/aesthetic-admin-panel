@@ -4,7 +4,7 @@ import prisma from "@/libs/prisma";
 import bcrypt from "bcrypt";
 
 
-const authOptions = {
+export const authOptions = {
   providers: [
     Credentials({
       name: "Credentials",
@@ -36,6 +36,9 @@ const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/login",
+  },
 };
 
 const handler = NextAuth(authOptions);
