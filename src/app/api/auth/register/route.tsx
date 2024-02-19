@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+
 import prisma from "@/libs/prisma";
 
 type Request = {
@@ -35,8 +36,6 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
-    // console.log(data);
 
     // Encryptar la contraseña
     const hashedPassword = await bcrypt.hash(data.password, 10);

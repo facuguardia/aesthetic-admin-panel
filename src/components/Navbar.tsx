@@ -1,5 +1,11 @@
 import React from "react";
 import Link from "next/link";
+// En este componente se importa la función getServerSession de next-auth/next
+// para obtener la sesión del usuario en el servidor.
+// También se importa el objeto authOptions que contiene las opciones de autenticación.
+// Este objeto se pasa como argumento a la función getServerSession.
+// authOptions contiene las opciones de autenticación que se definen en el archivo [...nextauth]/route.ts.
+
 
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";

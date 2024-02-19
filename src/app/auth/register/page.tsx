@@ -4,6 +4,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
+// Definicion de los valores que se utilizaran en el formulario
 type FormValues = {
   username: string;
   email: string;
@@ -14,17 +15,24 @@ type FormValues = {
 function RegisterPage() {
   const router = useRouter();
 
+  // Se utiliza la funcion useForm para manejar el formulario de React Hook Form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
 
+  // La funcion onSubmit es la encargada de manejar el registro del usuario
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // Se verifica que las contraseñas coincidan
     if (data.password !== data.confirmPassword) {
       return alert("Passwords do not match");
     }
 
+    // Se utiliza la funcion fetch para enviar los datos del usuario al servidor
+    // Se pasa como argumento el endpoint de la API
+    // Tambien se pasa un objeto con las credenciales del usuario
+    // realizamos una peticion POST
     const res = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
@@ -37,6 +45,8 @@ function RegisterPage() {
       },
     });
 
+    // Si el usuario se registra correctamente se redirige al usuario a la pagina de login
+    // Si el usuario no se registra correctamente se lanza un error
     if (res.ok) {
       router.push("/auth/login");
     } else {
